@@ -43,7 +43,7 @@ import numpy as np
 # year = np.random.uniform(0,1,1)*sim_years
 # year = int(np.floor(year))
 
-sim_years=3
+sim_years=5
 
 for i in range(0,int(sim_years)):
     year=int(i)
@@ -57,34 +57,18 @@ for i in range(0,int(sim_years)):
     import CA_exchange_time_series
     CA_exchange_time_series.exchange(year)
 
-    ############################################################################
-    #                          PNW TIME SERIES SETUP
-
-    # Note: In future versions this can be set up differently to coordinate hourly
-    # Export time series (PNW-->CAISO) with records of dispatched imports from the
-    # CAISO market model.
-
-
-    import PNW_exchange_time_series
-    PNW_exchange_time_series.exchange(year)
-
-
-    ############################################################################
+      ############################################################################
     #                          UC/ED Data File Setup
 
     # CALFIFORNIA
     # hist = 1 if looking at historical nuclear power production; facilitates use of
     # monthly nuclear power generation data from EIA. Note that if hist = 0
     # the model assumes that nuclear power plants in California have been retired.
-    hist = 0
-    hist_year = 2011
+    hist = 1
+    hist_year = 2011 + year
 
     import CA_data_setup
     CA_data_setup.setup(year,hist,hist_year)
 
-
-    # PACIFIC NORTHWEST
-    import PNW_data_setup
-    PNW_data_setup.setup(year)
 
     print(i)

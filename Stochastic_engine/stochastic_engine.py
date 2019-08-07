@@ -20,16 +20,16 @@ starttime = time.time()
 # STOCHASTIC WEATHER AND STREAMFLOW GENERATION
 
 # Specify a number of synthetic years to be simulated 
-sim_years=20
+sim_years=5
 
 # Generate synthetic weather (wind speed and temperature) records. 
-import synthetic_temp_wind_v2
-synthetic_temp_wind_v2.synthetic(sim_years)
-print('synth weather')
-
-# Generate synthetic streamflow records 
-import synthetic_streamflow_v2
-print('streamflows')
+#import synthetic_temp_wind_v2
+#synthetic_temp_wind_v2.synthetic(sim_years)
+#print('synth weather')
+#
+## Generate synthetic streamflow records 
+#import synthetic_streamflow_v2
+#print('streamflows')
 #############################################################################
 #
 #############################################################################
@@ -40,15 +40,15 @@ import CA_hydropower
 CA_hydropower.hydro(sim_years)
 print('CA hydropower')
 
-#Willamette operational model
-import Willamette_launch
-print('Willamette')
-
-
-# Federal Columbia River Power System Model (mass balance in Python)
-import ICF_calc_new
-import FCRPS_New
-print('FCRPS')
+##Willamette operational model
+#import Willamette_launch
+#print('Willamette')
+#
+#
+## Federal Columbia River Power System Model (mass balance in Python)
+#import ICF_calc_new
+#import FCRPS_New
+#print('FCRPS')
 
 #############################################################################
 #
@@ -57,23 +57,23 @@ print('FCRPS')
 #
 ## WIND
 # Specify installed capacity of wind power for each zone
-PNW_cap = 6445
-CAISO_cap = 4915
+PNW_cap = 1
+CAISO_cap = 1
 
 # Generate synthetic hourly wind power production time series for the BPA and
 # CAISO zones for the entire simulation period
-import wind_speed2_wind_power
-wind_speed2_wind_power.wind_sim(sim_years,PNW_cap,CAISO_cap)
+import wind_speed2_wind_power_2012_2016
+wind_speed2_wind_power_2012_2016.wind_sim(sim_years,PNW_cap,CAISO_cap)
 print('wind')
 
 # SOLAR
 # Specify installed capacity of wind power for each zone
-CAISO_solar_cap = 9890
+CAISO_solar_cap = 1
 
 # Generate synthetic hourly solar power production time series for 
 # the CAISO zone for the entire simulation period
-import solar_production_simulation
-solar_production_simulation.solar_sim(sim_years,CAISO_solar_cap)
+import solar_production_simulation_2012_2016
+solar_production_simulation_2012_2016.solar_sim(sim_years,CAISO_solar_cap)
 print('solar')
 ##############################################################################
 #
@@ -86,7 +86,7 @@ print('solar')
 
 # NOTE: NEED TO ACCOUNT FOR PNW DEMAND CALCULATION IN FOLLOWING SCRIPT
 
-import demand_pathflows
+import demand_pathflows_2012_2016
 print('paths')
 ##############################################################################
 #
@@ -97,18 +97,18 @@ print('paths')
 # *OR*
 # ESTIMATE STATIC GAS PRICES FOR EACH ZONE
 
-import numpy as np
-ng = np.ones((sim_years*365,5))
-ng[:,0] = ng[:,0]*4.47
-ng[:,1] = ng[:,1]*4.47
-ng[:,2] = ng[:,2]*4.66
-ng[:,3] = ng[:,3]*4.66
-ng[:,4] = ng[:,4]*5.13
-
-import pandas as pd
-NG = pd.DataFrame(ng)
-NG.columns = ['SCE','SDGE','PGE_valley','PGE_bay','PNW']
-NG.to_excel('Gas_prices/NG.xlsx')
+#import numpy as np
+#ng = np.ones((sim_years*365,5))
+#ng[:,0] = ng[:,0]*4.47
+#ng[:,1] = ng[:,1]*4.47
+#ng[:,2] = ng[:,2]*4.66
+#ng[:,3] = ng[:,3]*4.66
+#ng[:,4] = ng[:,4]*5.13
+#
+#import pandas as pd
+#NG = pd.DataFrame(ng)
+#NG.columns = ['SCE','SDGE','PGE_valley','PGE_bay','PNW']
+#NG.to_excel('Gas_prices/NG.xlsx')
 
 elapsed = time.time() - starttime
 print(elapsed)
