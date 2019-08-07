@@ -22,14 +22,14 @@ starttime = time.time()
 # Specify a number of synthetic years to be simulated 
 sim_years=5
 
-# Generate synthetic weather (wind speed and temperature) records. 
-#import synthetic_temp_wind_v2
-#synthetic_temp_wind_v2.synthetic(sim_years)
-#print('synth weather')
-#
-## Generate synthetic streamflow records 
-#import synthetic_streamflow_v2
-#print('streamflows')
+ Generate synthetic weather (wind speed and temperature) records. 
+import synthetic_temp_wind_v2
+synthetic_temp_wind_v2.synthetic(sim_years)
+print('synth weather')
+
+# Generate synthetic streamflow records 
+import synthetic_streamflow_v2
+print('streamflows')
 #############################################################################
 #
 #############################################################################
@@ -40,15 +40,15 @@ import CA_hydropower
 CA_hydropower.hydro(sim_years)
 print('CA hydropower')
 
-##Willamette operational model
-#import Willamette_launch
-#print('Willamette')
-#
-#
-## Federal Columbia River Power System Model (mass balance in Python)
-#import ICF_calc_new
-#import FCRPS_New
-#print('FCRPS')
+#Willamette operational model
+import Willamette_launch
+print('Willamette')
+
+
+# Federal Columbia River Power System Model (mass balance in Python)
+import ICF_calc_new
+import FCRPS_New
+print('FCRPS')
 
 #############################################################################
 #
@@ -62,8 +62,8 @@ CAISO_cap = 1
 
 # Generate synthetic hourly wind power production time series for the BPA and
 # CAISO zones for the entire simulation period
-import wind_speed2_wind_power_2012_2016
-wind_speed2_wind_power_2012_2016.wind_sim(sim_years,PNW_cap,CAISO_cap)
+import wind_speed2_wind_power
+wind_speed2_wind_power.wind_sim(sim_years,PNW_cap,CAISO_cap)
 print('wind')
 
 # SOLAR
@@ -72,8 +72,8 @@ CAISO_solar_cap = 1
 
 # Generate synthetic hourly solar power production time series for 
 # the CAISO zone for the entire simulation period
-import solar_production_simulation_2012_2016
-solar_production_simulation_2012_2016.solar_sim(sim_years,CAISO_solar_cap)
+import solar_production_simulation
+solar_production_simulation.solar_sim(sim_years,CAISO_solar_cap)
 print('solar')
 ##############################################################################
 #
@@ -86,7 +86,7 @@ print('solar')
 
 # NOTE: NEED TO ACCOUNT FOR PNW DEMAND CALCULATION IN FOLLOWING SCRIPT
 
-import demand_pathflows_2012_2016
+import demand_pathflows
 print('paths')
 ##############################################################################
 #
